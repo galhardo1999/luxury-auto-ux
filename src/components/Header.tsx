@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "Início", href: "#" },
-  { name: "Estoque", href: "#estoque" },
-  { name: "Serviços", href: "#servicos" },
-  { name: "Sobre", href: "#sobre" },
-  { name: "Contato", href: "#contato" },
+  { name: "Início", href: "/", isRoute: true },
+  { name: "Estoque", href: "/estoque", isRoute: true },
+  { name: "Serviços", href: "/#servicos", isRoute: false },
+  { name: "Sobre", href: "/#sobre", isRoute: false },
+  { name: "Contato", href: "/#contato", isRoute: false },
 ];
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded bg-gradient-to-br from-gold-dark via-gold to-gold-light flex items-center justify-center">
             <span className="font-display font-bold text-obsidian text-xl">S</span>
           </div>
@@ -42,20 +43,31 @@ const Header = () => {
             </span>
             <span className="text-[10px] uppercase tracking-[0.3em] text-gold/70">Motors</span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-cream/80 hover:text-gold transition-colors duration-300 text-sm font-medium tracking-wide relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.isRoute ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-cream/80 hover:text-gold transition-colors duration-300 text-sm font-medium tracking-wide relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-cream/80 hover:text-gold transition-colors duration-300 text-sm font-medium tracking-wide relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
+              </a>
+            )
+          )}
         </nav>
 
         {/* CTA Buttons */}
@@ -86,17 +98,29 @@ const Header = () => {
         }`}
       >
         <nav className="flex flex-col items-center justify-center h-full gap-8">
-          {navLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-cream text-2xl font-display hover:text-gold transition-colors"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link, index) =>
+            link.isRoute ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-cream text-2xl font-display hover:text-gold transition-colors"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-cream text-2xl font-display hover:text-gold transition-colors"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {link.name}
+              </a>
+            )
+          )}
           <Button variant="gold" size="lg" className="mt-4">
             Agendar Visita
           </Button>

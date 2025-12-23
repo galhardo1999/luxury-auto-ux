@@ -1,4 +1,5 @@
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
 
@@ -45,9 +46,11 @@ const HeroSection = () => {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animation-delay-300">
-            <Button variant="hero" size="xl" className="group">
-              Explorar Estoque
-              <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+            <Button variant="hero" size="xl" className="group" asChild>
+              <Link to="/estoque">
+                Explorar Estoque
+                <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
             <Button variant="goldOutline" size="xl" className="group">
               <Play size={18} className="mr-1" />
