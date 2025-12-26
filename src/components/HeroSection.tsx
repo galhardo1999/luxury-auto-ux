@@ -1,5 +1,6 @@
 import { ArrowRight, Play } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-showroom.jpg";
 
@@ -8,10 +9,13 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={heroImage}
           alt="Showroom de carros de luxo Surmani Motors"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          priority
+          placeholder="blur"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-obsidian/30" />
@@ -40,14 +44,14 @@ const HeroSection = () => {
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-cream/70 max-w-xl mb-10 leading-relaxed animate-fade-up animation-delay-200">
-            Descubra nossa curadoria de veículos seminovos de alto padrão. 
+            Descubra nossa curadoria de veículos seminovos de alto padrão.
             Cada automóvel é selecionado para oferecer a experiência que você merece.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animation-delay-300">
             <Button variant="hero" size="xl" className="group" asChild>
-              <Link to="/estoque">
+              <Link href="/estoque">
                 Explorar Estoque
                 <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </Link>

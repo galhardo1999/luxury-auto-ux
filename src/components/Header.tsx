@@ -1,19 +1,24 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { name: "Início", href: "/", isRoute: true },
   { name: "Estoque", href: "/estoque", isRoute: true },
-  { name: "Serviços", href: "/#servicos", isRoute: false },
-  { name: "Sobre", href: "/#sobre", isRoute: false },
-  { name: "Contato", href: "/#contato", isRoute: false },
+  { name: "Serviços", href: "/servicos", isRoute: true },
+  { name: "Sobre", href: "/sobre", isRoute: true },
+  { name: "Contato", href: "/contato", isRoute: true },
+  { name: "Login", href: "/login", isRoute: true },
 ];
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,15 +30,14 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-obsidian/95 backdrop-blur-xl border-b border-gold/10 py-3"
-          : "bg-transparent py-6"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? "bg-obsidian/95 backdrop-blur-xl border-b border-gold/10 py-3"
+        : "bg-transparent py-6"
+        }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded bg-gradient-to-br from-gold-dark via-gold to-gold-light flex items-center justify-center">
             <span className="font-display font-bold text-obsidian text-xl">S</span>
           </div>
@@ -51,7 +55,7 @@ const Header = () => {
             link.isRoute ? (
               <Link
                 key={link.name}
-                to={link.href}
+                href={link.href}
                 className="text-cream/80 hover:text-gold transition-colors duration-300 text-sm font-medium tracking-wide relative group"
               >
                 {link.name}
@@ -93,16 +97,15 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed inset-0 top-[72px] bg-obsidian/98 backdrop-blur-xl transition-all duration-500 ${
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+        className={`lg:hidden fixed inset-0 top-[72px] bg-obsidian/98 backdrop-blur-xl transition-all duration-500 ${isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          }`}
       >
         <nav className="flex flex-col items-center justify-center h-full gap-8">
           {navLinks.map((link, index) =>
             link.isRoute ? (
               <Link
                 key={link.name}
-                to={link.href}
+                href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-cream text-2xl font-display hover:text-gold transition-colors"
                 style={{ animationDelay: `${index * 100}ms` }}

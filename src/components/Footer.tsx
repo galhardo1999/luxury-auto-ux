@@ -1,3 +1,5 @@
+"use client";
+
 import { Instagram, Facebook, Youtube, Linkedin, MapPin, Phone, Mail, ArrowUp } from "lucide-react";
 
 const footerLinks = {
@@ -53,7 +55,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-cream/60 mb-6 max-w-sm leading-relaxed">
-              Há mais de 12 anos proporcionando experiências únicas no mercado de veículos 
+              Há mais de 12 anos proporcionando experiências únicas no mercado de veículos
               premium. Excelência, confiança e sofisticação em cada negócio.
             </p>
 

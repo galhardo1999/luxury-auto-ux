@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Search, SlidersHorizontal, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -80,8 +82,8 @@ const VehicleShowcase = () => {
   const [selectedBrand, setSelectedBrand] = useState("Todas");
   const [showFilters, setShowFilters] = useState(false);
 
-  const filteredVehicles = selectedBrand === "Todas" 
-    ? vehicles 
+  const filteredVehicles = selectedBrand === "Todas"
+    ? vehicles
     : vehicles.filter(v => v.brand === selectedBrand);
 
   return (
@@ -99,7 +101,7 @@ const VehicleShowcase = () => {
             Veículos em <span className="luxury-text-gradient">Destaque</span>
           </h2>
           <p className="text-cream/60 max-w-2xl mx-auto">
-            Uma seleção exclusiva dos melhores veículos do mercado, 
+            Uma seleção exclusiva dos melhores veículos do mercado,
             cuidadosamente inspecionados para garantir excelência em cada detalhe.
           </p>
         </div>
@@ -169,11 +171,10 @@ const VehicleShowcase = () => {
             <button
               key={brand}
               onClick={() => setSelectedBrand(brand)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedBrand === brand
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedBrand === brand
                   ? "bg-gold text-obsidian"
                   : "bg-obsidian-light text-cream/70 border border-gold/20 hover:border-gold/50 hover:text-cream"
-              }`}
+                }`}
             >
               {brand}
             </button>

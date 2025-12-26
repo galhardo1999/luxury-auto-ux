@@ -1,5 +1,7 @@
+"use client";
+
 import { Heart, Gauge, Fuel, Calendar } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 interface Vehicle {
@@ -33,10 +35,10 @@ const formatKm = (km: number) => {
 };
 
 const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleViewDetails = () => {
-    navigate(`/estoque/${vehicle.id}`);
+    router.push(`/estoque/${vehicle.id}`);
   };
 
   return (
@@ -107,8 +109,8 @@ const VehicleCard = ({ vehicle, index }: VehicleCardProps) => {
               {formatPrice(vehicle.price)}
             </span>
           </div>
-          <Button 
-            variant="luxury" 
+          <Button
+            variant="luxury"
             size="sm"
             onClick={handleViewDetails}
             data-testid={`button-view-details-${vehicle.id}`}
